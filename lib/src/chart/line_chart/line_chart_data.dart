@@ -1003,7 +1003,13 @@ List<TouchedSpotIndicatorData> defaultTouchedIndicators(
       /// Indicator Line
       var lineColor = barData.gradient?.colors.first ?? barData.color;
       if (barData.dotData.show) {
-        lineColor = _defaultGetDotColor(barData.spots[index], 0, barData);
+        if (index < 0 || index >= barData.spots.length) {
+          print(
+            'Tentativa de acesso inválido: barData.spots[$index] (tamanho: ${barData.spots.length})',
+          );
+        } else {
+          lineColor = _defaultGetDotColor(barData.spots[index], 0, barData);
+        }
       }
       const lineStrokeWidth = 4.0;
       final flLine = FlLine(color: lineColor, strokeWidth: lineStrokeWidth);
